@@ -2,6 +2,7 @@ const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: "development",
@@ -37,13 +38,11 @@ module.exports = {
       template: "./index.html"
     }),
     // copy custom static assets
-    new CopyWebpackPlugin([
-      {
-        from: './static',
-        to: './static',
-        ignore: ['.*']
-      }
-    ])
+    new CopyPlugin({
+      patterns: [
+        { from: 'static', to: 'static' },
+      ],
+    }),
 
   ]
 };
